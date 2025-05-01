@@ -17,29 +17,12 @@ pipeline {
         sh 'node --version'
       }
     }
-    stage('MySQL') {
+stage('DB') {
       agent {
         docker { image 'mysql:8.0' }
       }
       steps {
-        script {
-          // Start MySQL server and perform a simple task
-          def mysqlCommands = '''
-            # Wait for MySQL to start and initialize the database
-            sleep 30  # Give it some time for MySQL to be ready
-            # Show MySQL version
-            mysql --version
-            # Create a simple database and table
-            mysql -u root -e "CREATE DATABASE IF NOT EXISTS testdb;"
-            mysql -u root -e "USE testdb; CREATE TABLE IF NOT EXISTS users (id INT PRIMARY KEY, name VARCHAR(50));"
-            # Insert a sample record
-            mysql -u root -e "USE testdb; INSERT INTO users (id, name) VALUES (1, 'John Doe');"
-            # Query the data
-            mysql -u root -e "USE testdb; SELECT * FROM users;"
-          '''
-          // Run MySQL commands inside the container
-          sh mysqlCommands
-        }
+        sh 'SELECT * FROM XYZ'
       }
     }
   }
