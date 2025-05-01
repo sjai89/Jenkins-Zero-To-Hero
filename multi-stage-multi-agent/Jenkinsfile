@@ -22,7 +22,7 @@ stage('DB') {
         docker { image 'mysql:8.0' }
       }
       steps {
-        sh 'SELECT * FROM XYZ'
+        sh 'mysql --version'
       }
     }
   }
