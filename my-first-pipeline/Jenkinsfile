@@ -10,7 +10,17 @@ pipeline {
     }
 stage('Deploy') {
       steps {
-        sh 'sudo apt-get install nginx'
+        script {
+                    def installNginx = '''
+                        # Update package list
+                        sudo apt-get update
+                        
+                        # Install Nginx
+                        sudo apt-get install -y nginx
+                    '''
+                    // Execute the shell commands
+                    sh installNginx
+                }
       }
     }
   }
